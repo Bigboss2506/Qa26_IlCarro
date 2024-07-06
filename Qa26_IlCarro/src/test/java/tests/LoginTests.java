@@ -23,10 +23,10 @@ public class LoginTests extends TestBase {
 
     @Test
     public void loginSuccess(){
-        //margo@gmail.com
-        //Mmar123456$
+        //jeka@gmail.com
+        //Qaz123456!!!
         app.getHelperUser().openLoginForm();
-        app.getHelperUser().fillLoginForm("margo@gmail.com", "Mmar123456$");
+        app.getHelperUser().fillLoginForm("jeka@gmail.com", "Qaz123456!!!");
         app.getHelperUser().submitLogin();
 
         //Assert ---> if element with text "Logged in success" is present
@@ -39,14 +39,59 @@ public class LoginTests extends TestBase {
 
     @Test
     public void loginSuccessModel(){
-        //margo@gmail.com
-        //Mmar123456$
+        //jeka@gmail.com
+        //Qaz123456!!!
         app.getHelperUser().openLoginForm();
-        app.getHelperUser().fillLoginForm("margo@gmail.com", "Mmar123456$");
+        app.getHelperUser().fillLoginForm("jeka@gmail.com", "Qaz123456!!!");
         app.getHelperUser().submitLogin();
 
         //Assert ---> if element with text "Logged in success" is present
         Assert.assertEquals(app.getHelperUser().getMessage(), "Logged in success");
+
+        //app.getHelperUser().clickOkButton();
+
+
+    }
+
+    @Test
+    public void loginWrongEmail(){
+        //jekagmail.com
+        //Qaz123456!!!
+        app.getHelperUser().openLoginForm();
+        app.getHelperUser().fillLoginForm("jekagmail.com", "Qaz123456!!!");
+        app.getHelperUser().submitLogin();
+
+
+        Assert.assertEquals(app.getHelperUser().getEmail(), "It'snot look like email");
+
+        //app.getHelperUser().clickOkButton();
+
+
+    }
+    @Test
+    public void loginWrongPassword(){
+        //jeka@gmail.com
+        //Qaz123456
+        app.getHelperUser().openLoginForm();
+        app.getHelperUser().fillLoginForm("jeka@gmail.com", "Qaz123456");
+        app.getHelperUser().submitLogin();
+
+        Assert.assertEquals(app.getHelperUser().getMessage(), "\"Login or Password incorrect\"");
+
+        //app.getHelperUser().clickOkButton();
+
+
+    }
+    @Test
+    public void loginUnregisteredUser(){
+        //bubu@gmail.com
+        //Bubu123456$
+        app.getHelperUser().openLoginForm();
+        app.getHelperUser().fillLoginForm("bubu@gmail.com", "Bubu123456$");
+        app.getHelperUser().submitLogin();
+
+
+        Assert.assertEquals(app.getHelperUser().getMessage(), "\"Login or Password incorrect\"");
 
         //app.getHelperUser().clickOkButton();
 

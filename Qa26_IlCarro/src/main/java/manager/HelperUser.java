@@ -24,12 +24,17 @@ public class HelperUser extends HelperBase{
     }
 
     public void clickOkButton() {
-        click(By.xpath("//button[text()='Ok']"));
+        if(!isDisabled(By.xpath("//button[(@type='submit')]"))) {
+            click(By.xpath("//button[text()='Ok']"));
+        }
 
     }
 
+
+
+
     public String getMessage() {
-//        pause(1000);
+        pause(1000);
         return wd.findElement(By.cssSelector(".dialog-container>h2")).getText();
 
 //        WebElement element = wd.findElement(By.cssSelector(".dialog-container>h2"));
@@ -43,5 +48,11 @@ public class HelperUser extends HelperBase{
 
     public void logout() {
         click(By.xpath("//*[text()=' Logout ']"));
+    }
+
+    public String getEmail() {
+        pause(1000);
+
+        return wd.findElement(By.xpath("//div[(@class='ng-star-inserted' or @class='error')]")).getText();
     }
 }
