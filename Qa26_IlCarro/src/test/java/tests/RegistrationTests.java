@@ -44,4 +44,128 @@ public class RegistrationTests extends TestBase {
 
         Assert.assertEquals(app.getHelperUser().getMessage(), "You are logged in success");
     }
+
+    @Test
+    public void registrationEmptyName(){
+        User user = new User()
+                .setName("")
+                .setLastName("Bigboss")
+                .setEmail("jeka@gmail.com")
+                .setPassword("Qaz123456!!!");
+
+        app.getHelperUser().openRegistrationForm();
+        app.getHelperUser().fillRegistrationForm(user);
+        app.getHelperUser().checkPolicyXY();
+        app.getHelperUser().submit();
+
+        Assert.assertTrue(app.getHelperUser().isYallaButtonNotActive());
+        Assert.assertEquals(app.getHelperUser().getErrorText(),"Name is required");
+
+    }
+
+    @Test
+    public void registrationEmptyLastName(){
+        User user = new User()
+                .setName("Jeka")
+                .setLastName("")
+                .setEmail("jeka@gmail.com")
+                .setPassword("Qaz123456!!!");
+
+        app.getHelperUser().openRegistrationForm();
+        app.getHelperUser().fillRegistrationForm(user);
+        app.getHelperUser().checkPolicyXY();
+        app.getHelperUser().submit();
+
+        Assert.assertTrue(app.getHelperUser().isYallaButtonNotActive());
+        Assert.assertEquals(app.getHelperUser().getErrorText(),"Last name is required");
+
+    }
+    @Test
+    public void registrationWrongEmail(){
+        User user = new User()
+                .setName("Jeka")
+                .setLastName("Bigboss")
+                .setEmail("jekagmail.com")
+                .setPassword("Qaz123456!!!");
+
+        app.getHelperUser().openRegistrationForm();
+        app.getHelperUser().fillRegistrationForm(user);
+        app.getHelperUser().checkPolicyXY();
+        app.getHelperUser().submit();
+
+        Assert.assertTrue(app.getHelperUser().isYallaButtonNotActive());
+        Assert.assertTrue(app.getHelperUser().getErrorText().contains("Wrong email format"));
+
+    }
+
+    @Test
+    public void registrationEmptyEmail(){
+        User user = new User()
+                .setName("Jeka")
+                .setLastName("Bigboss")
+                .setEmail("")
+                .setPassword("Qaz123456!!!");
+
+        app.getHelperUser().openRegistrationForm();
+        app.getHelperUser().fillRegistrationForm(user);
+        app.getHelperUser().checkPolicyXY();
+        app.getHelperUser().submit();
+
+        Assert.assertTrue(app.getHelperUser().isYallaButtonNotActive());
+        Assert.assertEquals(app.getHelperUser().getErrorText(),"Email is required");
+
+    }
+
+    @Test
+    public void registrationWrongPassword(){
+        User user = new User()
+                .setName("Jeka")
+                .setLastName("Bigboss")
+                .setEmail("jeka@gmail.com")
+                .setPassword("Qaz12");
+
+        app.getHelperUser().openRegistrationForm();
+        app.getHelperUser().fillRegistrationForm(user);
+        app.getHelperUser().checkPolicyXY();
+        app.getHelperUser().submit();
+
+        Assert.assertTrue(app.getHelperUser().isYallaButtonNotActive());
+        Assert.assertTrue(app.getHelperUser().getErrorText().contains("Password must contain minimum 8"));
+
+    }
+    @Test
+    public void registrationEmptyPassword(){
+        User user = new User()
+                .setName("Jeka")
+                .setLastName("Bigboss")
+                .setEmail("jeka@gmail.com")
+                .setPassword("");
+
+        app.getHelperUser().openRegistrationForm();
+        app.getHelperUser().fillRegistrationForm(user);
+        app.getHelperUser().checkPolicyXY();
+        app.getHelperUser().submit();
+
+        Assert.assertTrue(app.getHelperUser().isYallaButtonNotActive());
+        Assert.assertEquals(app.getHelperUser().getErrorText(),"Password is required");
+
+    }
+
+    @Test
+    public void registrationWithoutCheckBox(){
+        User user = new User()
+                .setName("Jeka")
+                .setLastName("Bigboss")
+                .setEmail("jeka@gmail.com")
+                .setPassword("Qaz123456!!!");
+
+        app.getHelperUser().openRegistrationForm();
+        app.getHelperUser().fillRegistrationForm(user);
+        app.getHelperUser().submit();
+
+        Assert.assertTrue(app.getHelperUser().isYallaButtonNotActive());
+
+    }
+
+
 }

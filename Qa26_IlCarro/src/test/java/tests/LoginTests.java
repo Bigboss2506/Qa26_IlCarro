@@ -79,7 +79,7 @@ public class LoginTests extends TestBase {
         app.getHelperUser().submit();
 
 
-        Assert.assertEquals(app.getHelperUser().getEmail(), "It'snot look like email");
+        Assert.assertEquals(app.getHelperUser().getErrorText(), "It'snot look like email");
         Assert.assertTrue(app.getHelperUser().isYallaButtonNotActive());       //app.getHelperUser().clickOkButton();
 
 
@@ -94,7 +94,7 @@ public class LoginTests extends TestBase {
         app.getHelperUser().submit();
 
 
-        Assert.assertEquals(app.getHelperUser().getEmail(), "Email is required");
+        Assert.assertEquals(app.getHelperUser().getErrorText(), "Email is required");
         Assert.assertTrue(app.getHelperUser().isYallaButtonNotActive());       //app.getHelperUser().clickOkButton();
 
 

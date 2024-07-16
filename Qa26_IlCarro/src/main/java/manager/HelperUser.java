@@ -23,9 +23,7 @@ public class HelperUser extends HelperBase{
         type(By.id("password"),user.getPassword());
     }
 
-    public void submit() {
-        click(By.xpath("//*[@type='submit']"));
-    }
+
 
     public void clickOkButton() {
         if(!isDisabled(By.xpath("//button[(@type='submit')]"))) {
@@ -37,14 +35,7 @@ public class HelperUser extends HelperBase{
 
 
 
-    public String getMessage() {
-        pause(1000);
-        return wd.findElement(By.cssSelector(".dialog-container>h2")).getText();
 
-//        WebElement element = wd.findElement(By.cssSelector(".dialog-container>h2"));
-//        String text = element.getText();
-//        return text;
-    }
 
     public boolean isLogged() {
         return isElementPresent(By.xpath("//*[text()=' Logout ']"));
@@ -54,7 +45,7 @@ public class HelperUser extends HelperBase{
         click(By.xpath("//*[text()=' Logout ']"));
     }
 
-    public String getEmail() {
+    public String getErrorText() {
         pause(2000);
 
         return wd.findElement(By.xpath("//div[(@class='ng-star-inserted' or @class='error')]")).getText();
@@ -99,15 +90,24 @@ public class HelperUser extends HelperBase{
     }
 
     public void checkPolicyXY(){
-        WebElement label = wd.findElement(By.cssSelector("label[for='terms-of-use']"));
-        Rectangle rect = label.getRect();
-        int w = rect.getWidth();
-        int xOffSet = -w/2;
+        if(!wd.findElement(By.id("terms-of-use")).isSelected()) {
+            WebElement label = wd.findElement(By.cssSelector("label[for='terms-of-use']"));
+            Rectangle rect = label.getRect();
+            int w = rect.getWidth();
+            int xOffSet = -w / 2;
 
-        // Dimension size = wd.manage().window().getSize();
+            // Dimension size = wd.manage().window().getSize();
 
 
-        Actions actions = new Actions(wd);
-        actions.moveToElement(label,xOffSet,0).click().release().perform();
+            Actions actions = new Actions(wd);
+            actions.moveToElement(label, xOffSet, 0).click().release().perform();
+        }
+    }
+
+    public void login(User user) {
+        openLoginForm();
+        fillLoginForm(user);
+        submit();
+        clickOkButton();
     }
 }
