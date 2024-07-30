@@ -7,10 +7,26 @@ public class SearchCarTests extends TestBase{
 
     @Test
     public void searchCurrentMonthSuccess(){
-        app.getHelperCar().searchCurrentMonth("Tel Aviv","7/28/2024","7/30/2024");
+        app.getHelperCar().searchCurrentMonth("Tel Aviv","7/30/2024","7/31/2024");
         app.getHelperCar().submit();
-     //   Assert.assertTrue(app.getHelperCar().isListOfCarsAppeared());
+        Assert.assertTrue(app.getHelperCar().isListOfCarsAppeared());
 
+
+    }
+
+    @Test
+    public void searchCurrentYearSuccess(){
+        app.getHelperCar().searchCurrentYear("Rehovot", "10/15/2024", "12/10/2024");
+        app.getHelperCar().submit();
+        Assert.assertTrue(app.getHelperCar().isListOfCarsAppeared());
+    }
+
+    @Test
+    public void searchAnyPeriodSuccess(){
+        app.getHelperCar().searchAnyPeriod("Rehovot", "9/26/2024", "3/8/2025");
+
+        app.getHelperCar().submit();
+        Assert.assertTrue(app.getHelperCar().isListOfCarsAppeared());
 
     }
 }
