@@ -23,8 +23,6 @@ public class HelperUser extends HelperBase{
         type(By.id("password"),user.getPassword());
     }
 
-
-
     public void clickOkButton() {
         if(!isDisabled(By.xpath("//button[(@type='submit')]"))) {
             click(By.xpath("//button[text()='Ok']"));
@@ -32,33 +30,12 @@ public class HelperUser extends HelperBase{
 
     }
 
-
-
-
-
-
     public boolean isLogged() {
         return isElementPresent(By.xpath("//*[text()=' Logout ']"));
     }
 
     public void logout() {
         click(By.xpath("//*[text()=' Logout ']"));
-    }
-
-    public String getErrorText() {
-        pause(2000);
-
-        return wd.findElement(By.xpath("//div[(@class='ng-star-inserted' or @class='error')]")).getText();
-    }
-
-    public boolean isYallaButtonNotActive() {
-        boolean res = isElementPresent(By.cssSelector("button[disabled]"));
-
-
-        WebElement element = wd.findElement(By.cssSelector("button[type='submit']"));
-        boolean result = element.isEnabled();
-        return res && !result;
-
     }
 
 

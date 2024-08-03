@@ -64,6 +64,7 @@ public class HelperCar extends HelperBase{
 
     public void searchCurrentMonth(String city, String dateFrom, String dateTo) {
         typeCity(city);
+        clearTextField(By.id("dates"));
         click(By.id("dates"));
         String[] from = dateFrom.split("/"); //[7][27][2024]
         String[] to = dateTo.split("/");
@@ -92,6 +93,7 @@ public class HelperCar extends HelperBase{
 //    }
 
     private void typeCity(String city) {
+        clearTextField(By.id("city"));
         pause(1000);
         type(By.id("city"),city);
         pause(1000);
@@ -106,6 +108,8 @@ public class HelperCar extends HelperBase{
     public void searchCurrentYear(String city, String dateFrom, String dateTo) {
     //    "Rehovot", "10/15/2024", "12/10/2024"
         typeCity(city);
+
+        clearTextField(By.id("dates"));
         click(By.id("dates"));
 
         LocalDate now = LocalDate.now();
@@ -152,6 +156,7 @@ public class HelperCar extends HelperBase{
     public void searchAnyPeriod(String city, String dateFrom, String dateTo) {
         //"Rehovot", "9/26/2024", "3/8/2025"
         typeCity(city);
+        clearTextField(By.id("dates"));
         click(By.id("dates"));
 
         LocalDate now = LocalDate.now();
@@ -182,13 +187,18 @@ public class HelperCar extends HelperBase{
         click(By.xpath("//div[text()=' " + to.getDayOfMonth() + " ']"));
 
 
-
-
-
-
-
         }
 
 
+    public void navigateByLogo() {
+        click(By.cssSelector("a.logo"));
     }
+
+    public void searchNotValidPeriod(String city, String dateFrom, String dateTo) {
+        typeCity(city);
+        clearTextField(By.id("dates"));
+        type(By.id("dates"), dateFrom + " - " + dateTo);
+        click(By.cssSelector("div.cdk-overlay-backdrop"));
+    }
+}
 
